@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
         if (Input.anyKeyDown && !isPlaying) {
             audioSource.Play();
             isPlaying = true;
+
+            GameEvents.StartGame?.Invoke();
         }
     }
 }
