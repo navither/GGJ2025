@@ -49,7 +49,7 @@ public class Bird : MonoBehaviour
         {
             testmode = false;
         }
-        Debug.Log(a);
+        //Debug.Log(a);
     }
 
     private void Update()

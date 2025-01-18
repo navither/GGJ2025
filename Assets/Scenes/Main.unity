@@ -2091,7 +2091,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 15
   m_Sprite: {fileID: 21300000, guid: c0885076f0ddf2548918ca4827112531, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2113,8 +2113,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2163,7 +2163,6 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1721480534}
-  - {fileID: 1823292095}
   - {fileID: 140445809}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2531,13 +2530,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823292094}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.1246405, w: 0.99220204}
-  m_LocalPosition: {x: -1.11, y: 6.86, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: 0, y: 0, z: -0.20628949, w: 0.97849107}
+  m_LocalPosition: {x: -1.99, y: -3.06, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1579727585}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -14.32}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -23.81}
 --- !u!212 &1823292096
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2649,7 +2648,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.030649677, y: 0}
+  m_Offset: {x: 0.12367953, y: 0.094573766}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2660,7 +2659,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4869705, y: 1}
+  m_Size: {x: 0.35237005, y: 1.1891472}
   m_EdgeRadius: 0
 --- !u!1 &1933594427
 GameObject:
@@ -2788,6 +2787,7 @@ SceneRoots:
   - {fileID: 298293994}
   - {fileID: 1579727585}
   - {fileID: 1574907748}
+  - {fileID: 1823292095}
   - {fileID: 266715911}
   - {fileID: 584292053}
   - {fileID: 1587841882}
