@@ -20,13 +20,13 @@ public class TurningDisc : MonoBehaviour
     private void OnEnable()
     {
         GameEvents.StartGame += GameEvents_StartGame;
-        GameEvents.SetBuddleRadius += GameEvents_SetBuddleRadius;
+        //GameEvents.SetBuddleRadius += GameEvents_SetBuddleRadius;
         GameEvents.SetBuddleRotateSpeed += GameEvents_SetBuddleRotateSpeed;
     }
     private void OnDisble()
     {
         GameEvents.StartGame -= GameEvents_StartGame;
-        GameEvents.SetBuddleRadius -= GameEvents_SetBuddleRadius;
+        //GameEvents.SetBuddleRadius -= GameEvents_SetBuddleRadius;
         GameEvents.SetBuddleRotateSpeed -= GameEvents_SetBuddleRotateSpeed;
 
     }
@@ -34,11 +34,11 @@ public class TurningDisc : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (_isPlaying)
+        //if (_isPlaying) 
         //{
         //    transform.Rotate(Vector3.up, _rotationSpeed * Time.deltaTime);
         //}
-        transform.Rotate(Vector3.forward, _rotationSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.forward, -_rotationSpeed * Time.deltaTime);
 
     }
 

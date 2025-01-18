@@ -1,0 +1,60 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Bird : MonoBehaviour
+{
+    [SerializeField] GameObject _triggerZone;
+    [SerializeField] float _flyTime;
+
+    bool _setGravity;
+
+    float _time;
+
+    Vector3 _startPosition;
+    Vector3 _endPosition;
+    Vector3 _midPosition;
+
+    Rigidbody _rigidbody;
+
+    private void Awake()
+    {
+        _time = 0;
+        _flyTime = 1;
+        _startPosition = transform.position;
+        _endPosition = _triggerZone.transform.position;
+
+        float random = 0.3f + (0.7f - 0.3f) * Random.value;
+        _midPosition = Vector3.zero;
+        _midPosition.x = Mathf.Lerp(_startPosition.x, _endPosition.x, random);
+        _midPosition.y = Mathf.Lerp(_startPosition.y, _endPosition.y, random);
+
+        _midPosition += new Vector3(0, -5 + 10 * Random.value, 0);
+
+        _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody.useGravity = false;
+        _setGravity = false;
+    }
+
+    private void Update()
+    {
+        _time += Time.deltaTime;
+        if (_time <= _flyTime)
+        {
+            float t = _time / _flyTime;
+
+            transform.position = (1 - t) * (1 - t) * _startPosition + 2 * (1 - t) * t * _midPosition + t * t * _endPosition;
+        }
+        else
+        {
+            _rigidbody.useGravity = true;
+            float xDirection = -_startPosition.x / Mathf.Abs(_startPosition.x);
+
+            _rigidbody.AddForce(new Vector3(xDirection, -1f + 2 * Random.value, 0) * 5);
+
+        }
+
+
+
+    }
+}
