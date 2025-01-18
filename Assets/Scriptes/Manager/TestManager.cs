@@ -11,30 +11,39 @@ public class TestManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            Debug.Log("KeyCode.M");
             GameEvents.SetBackgroundMoveSpeed(10);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Debug.Log("KeyCode.R");
 
             GameEvents.SetBuddleRotateSpeed(300);
         }
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            Debug.Log("KeyCode.T");
 
             GameEvents.SetBuddleRadius(2);
         }
 
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            Debug.Log("KeyCode.T");
 
             GameEvents.SetBuddleRadius(3);
         }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            GameEvents.SetCharacterState(CharacterStateType.Idle);
+        }
 
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            GameEvents.SetCharacterState(CharacterStateType.Blow);
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            GameEvents.SetBubbleState(BubbleStateType.Purple);
+        }
     }
 }
