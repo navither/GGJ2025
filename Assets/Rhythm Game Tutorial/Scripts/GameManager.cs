@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [Tooltip("主要的背景音乐，从游戏开始播放")]
     public AudioSource audioSource;
 
     bool isPlaying = false;

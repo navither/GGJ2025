@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class BeatScroller : MonoBehaviour
@@ -17,12 +18,14 @@ public class BeatScroller : MonoBehaviour
 
     int bar = 0;
 
+    int currentScore = 0;
+
     //谱子数组
     public int [,] musicNotes = {
         {1, 1, 0, 1}, // 4拍的谱子
-        {1, 1, 1, 0},
+        {1, 1, 0, 1},
         {1, 1, 1, 1},
-        {0, 1, 1, 0},
+        {1, 1, 0, 1},
         {1, 1, 1, 1},
         {1, 1, 1, 1},
         {1, 1, 1, 1},
@@ -41,7 +44,7 @@ public class BeatScroller : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if(!hasStarted){
             if(Input.anyKeyDown){
@@ -63,6 +66,9 @@ public class BeatScroller : MonoBehaviour
     IEnumerator BeatingCoroutine(){
         while (true)
         {
+            if(bar >= musicNotes.GetLength(0)){
+                bar = 0;
+            }
             if(musicNotes[bar, counter] == 1){
                 GameObject note = GameObject.Instantiate<GameObject>(notePrefab, startPos, Quaternion.identity, transform);
                 note.transform.rotation = notePrefab.transform.rotation;
@@ -71,6 +77,7 @@ public class BeatScroller : MonoBehaviour
             counter++;
 
             if(counter >= 4){
+                FinishOneBar();
                 break;
             }
 
@@ -89,6 +96,18 @@ public class BeatScroller : MonoBehaviour
             bar++;
             StartCoroutine(BeatingCoroutine());
             yield return new WaitForSeconds(rotationSpeed * 4);  // 等待8拍的时间
+        }
+    }
+
+    //结束一bar
+    void FinishOneBar()
+    {
+        BeatChecker.instance.barScore = BeatChecker.instance.score - currentScore;
+        currentScore = BeatChecker.instance.score;
+        
+        if(BeatChecker.instance.barScore >= 3){
+            //GameEvents.SetBuddleRadius(Bubble.instance.transform.localScale.x + 1);
+            DOTween.Sequence().Append(Bubble.instance.transform.DOScale(new Vector3(1,1,1), 0.3f).SetEase(Ease.OutBack).SetRelative());
         }
     }
 }

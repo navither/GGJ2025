@@ -10,15 +10,20 @@ public class BeatChecker : MonoBehaviour
 {
     public static BeatChecker instance;
 
+    [HideInInspector]
     public GameObject currentNote;
 
     public bool isTiming = false;
 
     public int score = 0;
 
+    public int barScore = 0;
+
     public TextMeshProUGUI scoreText;
 
-    public RectTransform missEffect;
+    public GameObject missEffect;
+
+    public GameObject perfectEffect;
 
     public AudioClip[] clips;
 
@@ -63,17 +68,22 @@ public class BeatChecker : MonoBehaviour
             if (isTiming)
             {
                 //判定正确
-                Debug.Log("判定正确");
+                //Debug.Log("判定正确");
 
                 score++;
 
                 if(scoreText)
-                scoreText.text = score.ToString();
+                scoreText.text = barScore.ToString();
+
+                DOTween.Sequence().Append(perfectEffect.transform.DOScale(new Vector3(4, 4, 4), 0.3f).SetEase(Ease.OutBack))
+                    .Append(perfectEffect.transform.DOScale(new Vector3(0, 0, 0), 0.2f));
 
                 Destroy(currentNote);
             }
             else
             {
+                DOTween.Sequence().Append(missEffect.transform.DOScale(new Vector3(4, 4, 4), 0.3f).SetEase(Ease.OutBack))
+                    .Append(missEffect.transform.DOScale(new Vector3(0, 0, 0), 0.2f));
                 //判定错误
                 //Debug.Log("判定错误");
                 //Vector2 originPos = missEffect.anchoredPosition;
