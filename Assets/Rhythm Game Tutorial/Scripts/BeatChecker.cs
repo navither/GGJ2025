@@ -17,7 +17,7 @@ public class BeatChecker : MonoBehaviour
 
     public int score = 0;
 
-    public int barScore = 0;
+    public int barScore = 4;
 
     public TextMeshProUGUI scoreText;
 
@@ -106,6 +106,8 @@ public class BeatChecker : MonoBehaviour
                 AudioSource missAudio = missEffect.GetComponent<AudioSource>();
                 if(!missAudio.isPlaying)
                     missAudio.Play();
+
+                barScore--;
                 //判定错误
                 //Debug.Log("判定错误");
                 //Vector2 originPos = missEffect.anchoredPosition;

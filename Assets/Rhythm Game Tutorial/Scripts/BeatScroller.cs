@@ -22,7 +22,7 @@ public class BeatScroller : MonoBehaviour
     int currentScore = 0;
 
     //最小是八分音符
-    const int minumBeat = 8;
+    //const int minumBeat = 8;
 
     //谱子数组
     public int [,] musicNotes = { // 1/4拍一个index， 一列是两拍
@@ -106,7 +106,7 @@ public class BeatScroller : MonoBehaviour
         while (true)
         {
             if(bar >= musicNotes.GetLength(0)){
-                bar = 0;
+                bar = 0; //loop
             }
             if(musicNotes[bar, counter] == 1){
                 GameObject note = GameObject.Instantiate<GameObject>(notePrefab, startPos, Quaternion.identity, transform);
@@ -141,14 +141,20 @@ public class BeatScroller : MonoBehaviour
     //结束一bar
     void FinishOneBar()
     {
-        BeatChecker.instance.barScore = BeatChecker.instance.score - currentScore;
-        currentScore = BeatChecker.instance.score;
-        
-        if(BeatChecker.instance.barScore >= 3){
-            //GameEvents.SetBuddleRadius(Bubble.instance.transform.localScale.x + 1);
-            DOTween.Sequence().Append(Bubble.instance.transform.DOScale(new Vector3(1,1,1), 0.3f).SetEase(Ease.OutBack).SetRelative());
-            DOTween.Sequence().Append(character.DOScale(new Vector3(-0.2f,-0.2f,-0.2f), 0.3f).SetEase(Ease.OutBack).SetRelative())
-                .Join(character.DOLocalMoveY(-1f, 0.3f).SetRelative());
+        // BeatChecker.instance.barScore = BeatChecker.instance.score - currentScore;
+        // currentScore = BeatChecker.instance.score;
+        if(BeatChecker.instance.barScore <= 3){
+
+            GameEvents.SetBuddleRadius(Bubble.instance.transform.localScale.x - 0.1f);
+            // DOTween.Sequence().Append(Bubble.instance.transform.DOScale(new Vector3(1,1,1), 0.3f).SetEase(Ease.OutBack).SetRelative());
+            // DOTween.Sequence().Append(character.DOScale(new Vector3(-0.2f,-0.2f,-0.2f), 0.3f).SetEase(Ease.OutBack).SetRelative())
+            //     .Join(character.DOLocalMoveY(-1f, 0.3f).SetRelative());
+        }else if(BeatChecker.instance.score - currentScore > 0){
+            GameEvents.SetBuddleRadius(Bubble.instance.transform.localScale.x + 0.1f);
         }
+
+        currentScore = BeatChecker.instance.score;
+
+        BeatChecker.instance.barScore = 4;
     }
 }

@@ -192,15 +192,16 @@ MonoBehaviour:
   currentNote: {fileID: 0}
   isTiming: 0
   score: 0
-  barScore: 0
+  barScore: 4
   scoreText: {fileID: 0}
   missEffect: {fileID: 0}
   perfectEffect: {fileID: 0}
   clips:
-  - {fileID: 8300000, guid: 41ca0546675e02349b0f7a9e94638db3, type: 3}
-  - {fileID: 8300000, guid: 8fca31008a0bea24c9cdb4bc5db1a9ac, type: 3}
-  birdClip: {fileID: 8300000, guid: 6314d3c3d6c04564cbefccd808dbe586, type: 3}
+  - {fileID: 8300000, guid: 23b019439c9afeb409eb31b1ce0d391f, type: 3}
+  - {fileID: 8300000, guid: c9e896db0223d894284cb527855a7f98, type: 3}
+  birdClip: {fileID: 8300000, guid: abae5e8c8d407094cb549b23cac0793f, type: 3}
   birds: []
+  flyingBird: {fileID: 0}
 --- !u!82 &5810429215449052341
 AudioSource:
   m_ObjectHideFlags: 0
