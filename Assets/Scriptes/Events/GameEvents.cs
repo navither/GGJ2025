@@ -33,5 +33,7 @@ public static class GameEvents
 
     public static Action EndGame;
 
+    public static Action PreStartGame;
+    public static Action PreStartGameTwoStage;
 
 }

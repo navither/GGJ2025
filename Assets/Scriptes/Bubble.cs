@@ -37,6 +37,7 @@ public class Bubble : MonoBehaviour
         {
             case (BubbleStateType.Purple):
                 _animator.Play("ToPurple");
+                Debug.Log("ToPurple");
                 break;
             case (BubbleStateType.Boom):
                 _animator.Play("Boom");
@@ -50,6 +51,7 @@ public class Bubble : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 
     void GameEvents_StartGame()

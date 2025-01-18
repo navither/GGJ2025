@@ -7,6 +7,7 @@ public class Background : MonoBehaviour
     // Start is called before the first frame update
 
     [SerializeField] private float _moveSpeed;
+    [SerializeField] private GameObject _bubble;
 
     private bool _isPlaying;
 
@@ -15,6 +16,7 @@ public class Background : MonoBehaviour
     void Awake()
     {
         _isPlaying = false;
+        _moveSpeed = 0.75f;
     }
 
     private void OnEnable()
@@ -33,11 +35,13 @@ public class Background : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (_isPlaying)
-        //{
-        //    transform.position -= new Vector3(0, _moveSpeed, 0) * Time.deltaTime;
-        //}
-        transform.position -= new Vector3(0, _moveSpeed, 0) * Time.deltaTime;
+        _moveSpeed = 0.75f * _bubble.transform.localScale.y * 5;
+
+        if (_isPlaying)
+        {
+            transform.position -= new Vector3(0, _moveSpeed, 0) * Time.deltaTime;
+        }
+        //transform.position -= new Vector3(0, _moveSpeed, 0) * Time.deltaTime;
 
     }
 
