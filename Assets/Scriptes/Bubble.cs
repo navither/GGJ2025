@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Bubble : MonoBehaviour
 {
-
+    public static Bubble instance;
     private bool _isPlaying;
 
     private Animator _animator;
@@ -16,6 +16,7 @@ public class Bubble : MonoBehaviour
         _isPlaying = false;
         _animator = GetComponent<Animator>();
 
+        instance = this;
     }
 
     private void OnEnable()
