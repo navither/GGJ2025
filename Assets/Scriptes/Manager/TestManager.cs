@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class TestManager : MonoBehaviour
 {
-
+    float aa = 1;
 
     public void Update()
     {
-
+        
         if (Input.GetKeyDown(KeyCode.M))
         {
             GameEvents.SetBackgroundMoveSpeed(10);
@@ -22,8 +22,7 @@ public class TestManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-
-            GameEvents.SetBuddleRadius(2);
+            GameEvents.SetBuddleRadius(3);
         }
 
         if (Input.GetKeyDown(KeyCode.Y))
@@ -44,6 +43,21 @@ public class TestManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             GameEvents.SetBubbleState(BubbleStateType.Purple);
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            GameEvents.InstantiateBirdImpact();
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            GameEvents.InstantiateBird(new Vector3(-18.2f, 9.6f, 0));
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            //GameEvents.SetBubbleState(BubbleStateType.Boom);
+            GameEvents.EndGame();
         }
     }
 }

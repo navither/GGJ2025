@@ -35,7 +35,7 @@ public class StartView : MonoBehaviour
     private void OnStartButton()
     {
         UIEvents.CloseStartView?.Invoke();
-        UIEvents.OpenGameplayView?.Invoke();
+        //UIEvents.OpenGameplayView?.Invoke();
     }
 
     private void OnExitButton()
