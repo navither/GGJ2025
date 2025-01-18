@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class Character : MonoBehaviour
     private float _originCharacterHalfY;
     private float _originCharacterScale;
 
+    private Animator _animator;
 
     private void Awake()
     {
@@ -28,23 +30,43 @@ public class Character : MonoBehaviour
         _characterImage = transform.Find("Image");
         _originCharacterHalfY = _characterImage.GetComponent<SpriteRenderer>().sprite.bounds.size.y / 2 * _characterImage.localScale.y;
         _originCharacterScale = transform.localScale.y;
+
+        _animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
     {
         GameEvents.SetBuddleRadius += GameEvents_SetBuddleRadius;
+        GameEvents.SetCharacterState += GameEvents_SetCharacterState;
     }
     private void OnDisble()
     {
         GameEvents.SetBuddleRadius -= GameEvents_SetBuddleRadius;
-
+        GameEvents.SetCharacterState -= GameEvents_SetCharacterState;
     }
+
+    private void GameEvents_SetCharacterState(CharacterStateType type)
+    {
+        switch (type) 
+        {
+            case (CharacterStateType.Idle):
+                _animator.Play("Idle");
+                break;
+            case (CharacterStateType.Blow):
+                _animator.Play("Blow");
+                break;
+            default:
+                break;
+
+        }
+    }
+
     void GameEvents_SetBuddleRadius(float radius)
     {
         //transform.localScale = new Vector3(_originCircleScale)
 
         transform.localScale = Vector3.one * (_originBubbleScale / radius);
-        transform.position = _bubble.transform.position - new Vector3(0, radius / _originBubbleScale * _originCircleRadius + _originBubbleScale / radius * _originCharacterHalfY, 0);
+        transform.position = _bubble.transform.position - new Vector3(0, radius / _originBubbleScale * _originCircleRadius + _originBubbleScale / radius * _originCharacterHalfY * 0.9f, 0);
 
     }
 
