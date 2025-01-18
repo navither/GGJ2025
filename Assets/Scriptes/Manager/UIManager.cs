@@ -14,14 +14,22 @@ public class UIManager : MonoBehaviour
     {
         UIEvents.OpenStartView += UIEvents_OpenStartView;
         UIEvents.OpenGameplayView += UIEvents_OpenGameplayView;
+        UIEvents.OpenEndView += UIEvents_OpenEndView;
+
     }
 
     private void OnDisble()
     {
         UIEvents.OpenStartView -= UIEvents_OpenStartView;
         UIEvents.OpenGameplayView -= UIEvents_OpenGameplayView;
+        UIEvents.OpenEndView -= UIEvents_OpenEndView;
+
     }
 
+    private void UIEvents_OpenEndView()
+    {
+        Instantiate(_endViewPrefab, _canvas);
+    }
 
     private void UIEvents_OpenStartView()
     {

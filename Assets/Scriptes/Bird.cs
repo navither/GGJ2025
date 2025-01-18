@@ -15,7 +15,10 @@ public class Bird : MonoBehaviour
     Vector3 _endPosition;
     Vector3 _midPosition;
 
-    Rigidbody _rigidbody;
+    Rigidbody2D _rigidbody;
+
+    Animator _animator;
+    bool testmode;
 
     private void Awake()
     {
@@ -31,30 +34,70 @@ public class Bird : MonoBehaviour
 
         _midPosition += new Vector3(0, -5 + 10 * Random.value, 0);
 
-        _rigidbody = GetComponent<Rigidbody>();
-        _rigidbody.useGravity = false;
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _rigidbody.gravityScale = 0;
         _setGravity = false;
+        _animator = GetComponent<Animator>();
+        float a = Random.value;
+
+
+        if (a > Random.value)
+        {
+            testmode = true;
+        }
+        else
+        {
+            testmode = false;
+        }
+        Debug.Log(a);
     }
 
     private void Update()
     {
         _time += Time.deltaTime;
+        float ramd = 0;
         if (_time <= _flyTime)
         {
             float t = _time / _flyTime;
 
-            transform.position = (1 - t) * (1 - t) * _startPosition + 2 * (1 - t) * t * _midPosition + t * t * _endPosition;
+            Vector3 newPosition = (1 - t) * (1 - t) * _startPosition + 2 * (1 - t) * t * _midPosition + t * t * _endPosition;
+
+            if ((newPosition - transform.position).x > 0)
+            {
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
+            else
+            {
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
+
+            transform.position = newPosition;
+
         }
         else
         {
-            _rigidbody.useGravity = true;
-            float xDirection = -_startPosition.x / Mathf.Abs(_startPosition.x);
 
-            _rigidbody.AddForce(new Vector3(xDirection, -1f + 2 * Random.value, 0) * 5);
+            if (testmode)
+            {
+                _rigidbody.gravityScale = 1;
+                float xDirection = -_startPosition.x / Mathf.Abs(_startPosition.x);
 
+                _rigidbody.AddForce(new Vector3(xDirection, -5f + 10 * Random.value, 0) * 5);
+
+            }
+            else
+            {
+                _animator.Play("Die");
+
+                _rigidbody.gravityScale = 1;
+                float xDirection = -_startPosition.x / Mathf.Abs(_startPosition.x);
+
+                _rigidbody.AddForce(new Vector3(-xDirection, -5f + 5 * Random.value, 0) * 5);
+
+            }
         }
 
-
-
     }
+
+
 }

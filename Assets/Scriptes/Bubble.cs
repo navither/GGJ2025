@@ -38,6 +38,9 @@ public class Bubble : MonoBehaviour
             case (BubbleStateType.Purple):
                 _animator.Play("ToPurple");
                 break;
+            case (BubbleStateType.Boom):
+                _animator.Play("Boom");
+                break;
             default:
                 break;
 
