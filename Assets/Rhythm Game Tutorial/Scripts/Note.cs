@@ -20,6 +20,12 @@ public class Note : MonoBehaviour
             // 判定开始
             SpriteRenderer sr = other.GetComponent<SpriteRenderer>();
             sr.color = Color.green;
+
+            BeatChecker.instance.isTiming = true;
+
+            BeatChecker.instance.currentNote = this.gameObject;
+
+            //Debug.Log(Time.time - GameManager.beginTime);
         }
     }
 
@@ -29,6 +35,8 @@ public class Note : MonoBehaviour
             gameObject.SetActive(false);
             SpriteRenderer sr = other.GetComponent<SpriteRenderer>();
             sr.color = Color.white;
+
+            BeatChecker.instance.isTiming = false;
         }
     }
 
