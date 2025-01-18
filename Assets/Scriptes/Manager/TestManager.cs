@@ -4,11 +4,28 @@ using UnityEngine;
 
 public class TestManager : MonoBehaviour
 {
-    float aa = 1;
+    float count = 1;
 
     public void Update()
     {
-        
+
+        if (Input.GetKeyDown(KeyCode.RightBracket))
+        {
+            count += 1;
+
+            float r = 1 + count * 0.05f;
+            GameEvents.SetBuddleRadius(r);
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftBracket))
+        {
+            count -= 1;
+
+            float r = 1 + count * 0.05f;
+            GameEvents.SetBuddleRadius(r);
+        }
+
+
         if (Input.GetKeyDown(KeyCode.M))
         {
             GameEvents.SetBackgroundMoveSpeed(10);
@@ -40,10 +57,10 @@ public class TestManager : MonoBehaviour
             GameEvents.SetCharacterState(CharacterStateType.Blow);
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            GameEvents.SetBubbleState(BubbleStateType.Purple);
-        }
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    GameEvents.SetBubbleState(BubbleStateType.Purple);
+        //}
 
         if (Input.GetKeyDown(KeyCode.I))
         {
