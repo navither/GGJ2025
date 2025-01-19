@@ -10,6 +10,7 @@ public class GameplayManager : MonoBehaviour
     [SerializeField] private GameObject _circle;
     [SerializeField] private GameObject _character;
     [SerializeField] private GameObject _cloud;
+    [SerializeField] private GameObject _teach;
 
     [SerializeField] private GameObject _canvasObj;
     private Canvas _canvas;
@@ -53,6 +54,7 @@ public class GameplayManager : MonoBehaviour
     private void GameEvents_StartGame()
     {
         _isPlaying = true;
+        _teach.SetActive(false);
     }
 
     private void GameEvents_PreStartGameTwoStage()

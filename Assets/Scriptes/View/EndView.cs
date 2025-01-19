@@ -28,7 +28,7 @@ public class EndView : MonoBehaviour
 
     IEnumerator ShowName()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(3);
 
         _animator.Play("ShowName");
     }

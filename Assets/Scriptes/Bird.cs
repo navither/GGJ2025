@@ -28,7 +28,6 @@ public class Bird : MonoBehaviour
         isDie = false;
 
         _time = 0;
-        _flyTime = 1;
         _startPosition = transform.position;
         _endPosition = _triggerZone.transform.position;
 
