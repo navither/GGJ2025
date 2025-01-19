@@ -28,13 +28,16 @@ public class StartView : MonoBehaviour
 
     private void UIEvents_CloseStartView()
     {
-        //gameObject.SetActive(false);
-        Destroy(gameObject);
+        if(this == null) return;
+
+        gameObject.SetActive(false);
     }
 
     private void OnStartButton()
     {
         UIEvents.CloseStartView?.Invoke();
+
+        GameEvents.PreStartGame?.Invoke();
         //UIEvents.OpenGameplayView?.Invoke();
     }
 
