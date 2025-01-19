@@ -16,6 +16,12 @@ public class GameManager : MonoBehaviour
 
     public static float beginTime = 0;
 
+    float songLength = 0f;
+
+    private void Start() {
+        songLength = audioSource.clip.length;
+    }
+
     private void Update() {
         if (Input.anyKeyDown && !isPlaying) {
             audioSource.Play();
@@ -24,7 +30,7 @@ public class GameManager : MonoBehaviour
             //GameEvents.StartGame?.Invoke();
         }
 
-        if(audioSource.isPlaying == false && isPlaying && !gameOver) {
+        if(audioSource.isPlaying == false && Time.time - beginTime > songLength && !gameOver) {
             GameEvents.EndGame?.Invoke();
             noteHolder.SetActive(false);
             ring.SetActive(false);
