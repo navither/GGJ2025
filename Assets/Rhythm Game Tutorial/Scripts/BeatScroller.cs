@@ -119,11 +119,13 @@ public class BeatScroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameplayManager.started == false)
+            return;
         if(!hasStarted){
-            if(Input.anyKeyDown){
-                hasStarted = true;
-                ContinueBeating();
-            }
+
+            hasStarted = true;
+            ContinueBeating();
+
         }else{
             transform.RotateAround(transform.localPosition, Vector3.back, 90f / rotationSpeed * Time.deltaTime);
             //transform.position -= new Vector3(0f, beatTempo * Time.deltaTime, 0f);

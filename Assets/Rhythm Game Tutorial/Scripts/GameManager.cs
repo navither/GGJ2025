@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     [Tooltip("主要的背景音乐，从游戏开始播放")]
     public AudioSource audioSource;
 
+    public AudioClip mainAudio;
+
     public GameObject noteHolder;
     public GameObject ring;
 
@@ -20,10 +22,15 @@ public class GameManager : MonoBehaviour
 
     private void Start() {
         songLength = audioSource.clip.length;
+
+        audioSource.Play();
     }
 
     private void Update() {
-        if (Input.anyKeyDown && !isPlaying) {
+        if(GameplayManager.started == false)
+            return;
+        if (!isPlaying) {
+            audioSource.clip = mainAudio;   
             audioSource.Play();
             isPlaying = true;
             beginTime = Time.time;

@@ -35,7 +35,7 @@ public class Background : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _moveSpeed = 0.75f * _bubble.transform.localScale.y * 5;
+        _moveSpeed = 0.75f * _bubble.transform.localScale.y * 2f;
 
         if (_isPlaying)
         {

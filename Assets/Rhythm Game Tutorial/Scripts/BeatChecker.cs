@@ -29,9 +29,11 @@ public class BeatChecker : MonoBehaviour
 
     public AudioClip birdClip;
 
-    AudioSource keyAudioSource;
+    public AudioSource keyAudioSource;
 
     AudioSource birdAudioSource;
+
+    AudioSource flyHintSource;
 
     public List<GameObject> birds;
 
@@ -59,19 +61,25 @@ public class BeatChecker : MonoBehaviour
         birdAudioSource.clip = birdClip;
         birdAudioSource.mute = true;
 
+        flyHintSource = transform.GetChild(1).GetComponent<AudioSource>();
+
         keySoundMap = new Dictionary<KeyCode, AudioClip>
         {
             { KeyCode.F, clips[0] },
             { KeyCode.J, clips[1] },
+            { KeyCode.D, clips[2] },
+            { KeyCode.K, clips[3] },
         };
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(GameplayManager.started == false)
+            return;
         if(scoreText)
             scoreText.text = barScore.ToString();
-        if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.K))
         {
             if (isTiming)
             {
@@ -83,6 +91,10 @@ public class BeatChecker : MonoBehaviour
                 if(score == 2){
                     //FlyBird();
                     flyingBird.SetActive(true);
+                    flyHintSource.Play();
+                    // DOTween.Sequence().AppendInterval(0.3f).AppendCallback(() => {
+                    //     flyHintSource.Play();
+                    // });
                 }
     
 
