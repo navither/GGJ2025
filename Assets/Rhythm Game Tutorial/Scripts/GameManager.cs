@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
             audioSource.Play();
             isPlaying = true;
             beginTime = Time.time;
-            GameEvents.StartGame?.Invoke();
+            //GameEvents.StartGame?.Invoke();
         }
     }
 }

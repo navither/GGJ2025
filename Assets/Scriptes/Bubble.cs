@@ -7,6 +7,7 @@ public class Bubble : MonoBehaviour
 {
 
     private bool _isPlaying;
+    private bool _isEndStage;
 
     private Animator _animator;
 
@@ -14,6 +15,7 @@ public class Bubble : MonoBehaviour
     void Awake()
     {
         _isPlaying = false;
+        _isEndStage = false;
         _animator = GetComponent<Animator>();
 
     }
@@ -22,13 +24,21 @@ public class Bubble : MonoBehaviour
     {
         GameEvents.SetBuddleRadius += GameEvents_SetBuddleRadius;
         GameEvents.SetBubbleState += GameEvents_SetBubbleState;
+        GameEvents.EndGame += GameEvents_EndGame;
+
     }
     private void OnDisble()
     {
         GameEvents.SetBuddleRadius -= GameEvents_SetBuddleRadius;
         GameEvents.SetBubbleState -= GameEvents_SetBubbleState;
+        GameEvents.EndGame -= GameEvents_EndGame;
 
 
+    }
+
+    private void GameEvents_EndGame()
+    {
+        _isEndStage = true;
     }
 
     private void GameEvents_SetBubbleState(BubbleStateType type)
@@ -61,7 +71,21 @@ public class Bubble : MonoBehaviour
 
     void GameEvents_SetBuddleRadius(float radius)
     {
-        transform.localScale = new Vector3(radius, radius, radius);
+        float newRadius = radius;
+
+        if (_isEndStage)
+        {
+
+        }
+        else
+        {
+            if (radius >= 3)
+            {
+                newRadius = 3;
+            }
+        }
+
+        transform.localScale = new Vector3(newRadius, newRadius, newRadius);
     }
 
 }
