@@ -101,13 +101,7 @@ public class BeatChecker : MonoBehaviour
             }
             else
             {
-                DOTween.Sequence().Append(missEffect.transform.DOScale(new Vector3(4, 4, 4), 0.3f).SetEase(Ease.OutBack))
-                    .Append(missEffect.transform.DOScale(new Vector3(0, 0, 0), 0.2f));
-                AudioSource missAudio = missEffect.GetComponent<AudioSource>();
-                if(!missAudio.isPlaying)
-                    missAudio.Play();
-
-                barScore--;
+                Miss();
                 //判定错误
                 //Debug.Log("判定错误");
                 //Vector2 originPos = missEffect.anchoredPosition;
@@ -144,5 +138,16 @@ public class BeatChecker : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
         }
+    }
+
+    public void Miss()
+    {
+        DOTween.Sequence().Append(missEffect.transform.DOScale(new Vector3(4, 4, 4), 0.3f).SetEase(Ease.OutBack))
+            .Append(missEffect.transform.DOScale(new Vector3(0, 0, 0), 0.2f));
+        AudioSource missAudio = missEffect.GetComponent<AudioSource>();
+        if(!missAudio.isPlaying)
+            missAudio.Play();
+
+        barScore--;
     }
 }
