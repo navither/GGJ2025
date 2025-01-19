@@ -10,6 +10,10 @@ public class Bubble : MonoBehaviour
 
     private Animator _animator;
 
+    public float minimumRadius = 1f;
+
+    public float maximumRadius = 3f;
+
 
     void Awake()
     {
