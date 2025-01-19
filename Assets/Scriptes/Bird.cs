@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class Bird : MonoBehaviour
@@ -20,8 +21,12 @@ public class Bird : MonoBehaviour
     Animator _animator;
     bool testmode;
 
+    bool isDie;
+
     private void Awake()
     {
+        isDie = false;
+
         _time = 0;
         _flyTime = 1;
         _startPosition = transform.position;
@@ -52,10 +57,25 @@ public class Bird : MonoBehaviour
         //Debug.Log(a);
     }
 
+    private void OnEnable()
+    {
+        GameEvents.SetIsDie += GameEvents_SetIsDie;
+    }
+
+
+    private void OnDisble()
+    {
+        GameEvents.SetIsDie -= GameEvents_SetIsDie;
+    }
+
+    private void GameEvents_SetIsDie(bool obj)
+    {
+        isDie = true;
+    }
+
     private void Update()
     {
         _time += Time.deltaTime;
-        float ramd = 0;
         if (_time <= _flyTime)
         {
             float t = _time / _flyTime;
@@ -77,7 +97,7 @@ public class Bird : MonoBehaviour
         else
         {
 
-            if (testmode)
+            if (!isDie)
             {
                 _rigidbody.gravityScale = 1;
                 float xDirection = -_startPosition.x / Mathf.Abs(_startPosition.x);

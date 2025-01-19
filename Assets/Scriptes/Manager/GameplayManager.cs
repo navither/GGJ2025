@@ -75,7 +75,7 @@ public class GameplayManager : MonoBehaviour
     {
         if (_canMainCharacterMove)
         {
-            if (Vector3.Distance(_bubble.transform.position, Vector3.zero) < 0.01)
+            if (_bubble.transform.position.y > 0)
             {
                 _bubble.transform.position = Vector3.zero;
                 _canMainCharacterMove = false;
