@@ -180,14 +180,17 @@ public class BeatScroller : MonoBehaviour
     {
         // BeatChecker.instance.barScore = BeatChecker.instance.score - currentScore;
         // currentScore = BeatChecker.instance.score;
-        if(BeatChecker.instance.barScore <= 3){
+        float amount = Bubble.instance.maximumRadius / 60f;
 
-            GameEvents.SetBuddleRadius(Bubble.instance.transform.localScale.x - 0.1f);
+        if(BeatChecker.instance.barScore <= 3){                
+            if(Bubble.instance.transform.localScale.x > Bubble.instance.minimumRadius){
+                GameEvents.SetBuddleRadius(Bubble.instance.transform.localScale.x - amount / 2);                
+            }
             // DOTween.Sequence().Append(Bubble.instance.transform.DOScale(new Vector3(1,1,1), 0.3f).SetEase(Ease.OutBack).SetRelative());
             // DOTween.Sequence().Append(character.DOScale(new Vector3(-0.2f,-0.2f,-0.2f), 0.3f).SetEase(Ease.OutBack).SetRelative())
             //     .Join(character.DOLocalMoveY(-1f, 0.3f).SetRelative());
         }else if(BeatChecker.instance.score - currentScore > 0){
-            GameEvents.SetBuddleRadius(Bubble.instance.transform.localScale.x + 0.1f);
+            GameEvents.SetBuddleRadius(Bubble.instance.transform.localScale.x + amount);
         }
 
         currentScore = BeatChecker.instance.score;
