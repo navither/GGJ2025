@@ -23,6 +23,7 @@ public static class GameEvents
 
     public static Action<float> SetBackgroundMoveSpeed;
 
+    //人物动作
     public static Action<CharacterStateType> SetCharacterState;
     public static Action<BubbleStateType> SetBubbleState;
 
@@ -36,4 +37,5 @@ public static class GameEvents
     public static Action PreStartGame;
     public static Action PreStartGameTwoStage;
 
+    public static Action<bool> SetIsDie;
 }

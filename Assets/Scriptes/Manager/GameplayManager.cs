@@ -10,6 +10,7 @@ public class GameplayManager : MonoBehaviour
     [SerializeField] private GameObject _circle;
     [SerializeField] private GameObject _character;
     [SerializeField] private GameObject _cloud;
+    [SerializeField] private GameObject _teach;
 
     [SerializeField] private GameObject _canvasObj;
     private Canvas _canvas;
@@ -25,8 +26,6 @@ public class GameplayManager : MonoBehaviour
     private bool _isChangedColor;
     private bool _isPlaying;
     private bool _disableChangeColor;
-
-    public static bool started = false;
 
     private void Awake()
     {
@@ -55,8 +54,7 @@ public class GameplayManager : MonoBehaviour
     private void GameEvents_StartGame()
     {
         _isPlaying = true;
-
-        started = true;
+        _teach.SetActive(false);
     }
 
     private void GameEvents_PreStartGameTwoStage()
@@ -75,12 +73,11 @@ public class GameplayManager : MonoBehaviour
         StartCoroutine(EndGame());
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (_canMainCharacterMove)
         {
-            //if (Vector3.Distance(_bubble.transform.position, Vector3.zero) < 0.01)
-            if(_bubble.transform.position.y > 0 && !started)
+            if (_bubble.transform.position.y > 0)
             {
                 _bubble.transform.position = Vector3.zero;
                 _canMainCharacterMove = false;
@@ -129,7 +126,7 @@ public class GameplayManager : MonoBehaviour
             float bubbleExpansionRadius = _expansionRadius / _circle.transform.localScale.y;
             float newScale = Mathf.Lerp(_bubbleRadius, bubbleExpansionRadius, t);
             _bubble.transform.localScale = Vector3.one * newScale;
-            yield return null; // ï¿½È´ï¿½ï¿½ï¿½Ò»Ö¡
+            yield return null; // µÈ´ýÏÂÒ»Ö¡
         }
         _canvas.sortingOrder = 3;
         UIEvents.OpenEndView();
@@ -143,7 +140,7 @@ public class GameplayManager : MonoBehaviour
             float bubbleExpansionRadius = _expansionRadius / _circle.transform.localScale.y;
             float newScale = _bubbleRadius + t * (bubbleExpansionRadius - _bubbleRadius);
             _bubble.transform.localScale = Vector3.one * newScale;
-            yield return null; // ï¿½È´ï¿½ï¿½ï¿½Ò»Ö¡
+            yield return null; // µÈ´ýÏÂÒ»Ö¡
         }
 
     }

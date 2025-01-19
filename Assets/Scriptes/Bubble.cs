@@ -16,6 +16,7 @@ public class Bubble : MonoBehaviour
     public float maximumRadius = 3f;
 
 
+
     void Awake()
     {
         _isPlaying = false;
@@ -84,9 +85,14 @@ public class Bubble : MonoBehaviour
         }
         else
         {
-            if (radius >= 3)
+            if (radius >= maximumRadius)
             {
-                newRadius = 3;
+                newRadius = maximumRadius;
+            }
+
+            if (radius <= minimumRadius)
+            {
+                newRadius = minimumRadius;
             }
         }
 
