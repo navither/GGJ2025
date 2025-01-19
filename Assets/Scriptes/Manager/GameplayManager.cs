@@ -75,11 +75,12 @@ public class GameplayManager : MonoBehaviour
         StartCoroutine(EndGame());
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (_canMainCharacterMove)
         {
-            if (Vector3.Distance(_bubble.transform.position, Vector3.zero) < 0.01)
+            //if (Vector3.Distance(_bubble.transform.position, Vector3.zero) < 0.01)
+            if(_bubble.transform.position.y > 0 && !started)
             {
                 _bubble.transform.position = Vector3.zero;
                 _canMainCharacterMove = false;

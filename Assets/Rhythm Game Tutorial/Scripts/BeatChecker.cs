@@ -35,6 +35,8 @@ public class BeatChecker : MonoBehaviour
 
     AudioSource flyHintSource;
 
+    public AudioSource uiAudio;
+
     public List<GameObject> birds;
 
     public GameObject flyingBird;
@@ -42,6 +44,8 @@ public class BeatChecker : MonoBehaviour
     int birdIndex = 0;
 
     private Dictionary<KeyCode, AudioClip> keySoundMap;
+
+    int currentCharacterState = 0;
 
     private void OnEnable() {
         GameEvents.StartGame += PlayChorsClip;
@@ -55,7 +59,7 @@ public class BeatChecker : MonoBehaviour
     {
         instance = this;
 
-        keyAudioSource = GetComponent<AudioSource>();
+        
 
         birdAudioSource = transform.GetChild(0).GetComponent<AudioSource>();
         birdAudioSource.clip = birdClip;
@@ -122,7 +126,13 @@ public class BeatChecker : MonoBehaviour
                 // .Append(missEffect.DOAnchorPos(originPos, 0));
             }
 
-
+            if(currentCharacterState == 0){
+                GameEvents.SetCharacterState(CharacterStateType.Blow);
+                currentCharacterState = 1;
+            }else{
+                GameEvents.SetCharacterState(CharacterStateType.Idle);
+                currentCharacterState = 0;
+            }
 
 
         }

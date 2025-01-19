@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 /// <summary>
@@ -8,10 +9,14 @@ using UnityEngine;
 public class Note : MonoBehaviour
 {
     Collider2D noteCollider2D;
+    SpriteRenderer spriteRenderer;
 
     private void Start() {
         noteCollider2D = GetComponent<Collider2D>();
         noteCollider2D.enabled = false;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        DOTween.Sequence().Append(spriteRenderer.DOFade(1, 1.2f));
         StartCoroutine(LateActivate());
     }
 

@@ -12,7 +12,7 @@ public class EndView : MonoBehaviour
 
     Animator _animator;
 
-    Text _score;
+    static Text _score;
 
     void Awake()
     {
@@ -22,6 +22,8 @@ public class EndView : MonoBehaviour
 
 
         _animator = GetComponent<Animator>();
+
+        _score.text = BeatChecker.instance.score.ToString();
 
         StartCoroutine(ShowName());
     }
@@ -53,7 +55,8 @@ public class EndView : MonoBehaviour
 
     private void UIEvents_SetEndGameScore(int score)
     {
-        _score.text = score.ToString();
+        //_score.text = score.ToString();
+        _score.text = BeatChecker.instance.score.ToString();
     }
 
     private void UIEvents_CloseEndView()

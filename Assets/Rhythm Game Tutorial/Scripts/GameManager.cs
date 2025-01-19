@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour
 
     public AudioClip mainAudio;
 
+    //玩家上升
+    public AudioClip upAudio;
+
+    public AudioClip overAudio;
+
     public GameObject noteHolder;
     public GameObject ring;
 
@@ -20,8 +25,17 @@ public class GameManager : MonoBehaviour
 
     float songLength = 0f;
 
+    private void OnEnable() {
+        GameEvents.PreStartGame += () => {
+            audioSource.Stop();
+            audioSource.clip = upAudio;
+            audioSource.Play();
+        };
+    }
+
     private void Start() {
-        songLength = audioSource.clip.length;
+        songLength = mainAudio.length;
+
 
         audioSource.Play();
     }
@@ -42,6 +56,8 @@ public class GameManager : MonoBehaviour
             noteHolder.SetActive(false);
             ring.SetActive(false);
             gameOver = true;
+            audioSource.clip = overAudio;
+            audioSource.Play();
         }
     }
 }

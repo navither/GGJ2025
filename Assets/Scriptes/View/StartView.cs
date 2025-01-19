@@ -9,6 +9,8 @@ public class StartView : MonoBehaviour
     Button _startButton;
     Button _exitButton;
 
+    public AudioClip startClip;
+
     void Awake()
     {
         _startButton = transform.Find("StartButton").GetComponent<Button>();
@@ -35,9 +37,11 @@ public class StartView : MonoBehaviour
 
     private void OnStartButton()
     {
+        BeatChecker.instance.uiAudio.PlayOneShot(startClip);
         UIEvents.CloseStartView?.Invoke();
 
         GameEvents.PreStartGame?.Invoke();
+
         //UIEvents.OpenGameplayView?.Invoke();
     }
 
