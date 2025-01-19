@@ -34,11 +34,11 @@ public class TurningDisc : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (_isPlaying) 
-        //{
-        //    transform.Rotate(Vector3.up, _rotationSpeed * Time.deltaTime);
-        //}
-        transform.Rotate(Vector3.forward, -_rotationSpeed * Time.deltaTime);
+        if (_isPlaying)
+        {
+            transform.Rotate(Vector3.forward, -_rotationSpeed * Time.deltaTime);
+        }
+        //transform.Rotate(Vector3.forward, -_rotationSpeed * Time.deltaTime);
 
     }
 

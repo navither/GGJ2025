@@ -10,6 +10,8 @@ public class EndView : MonoBehaviour
     Button _restartButton;
     Button _exitButton;
 
+    Animator _animator;
+
     Text _score;
 
     void Awake()
@@ -17,6 +19,18 @@ public class EndView : MonoBehaviour
         _restartButton = transform.Find("RestartButton").GetComponent<Button>();
         _exitButton = transform.Find("ExitButton").GetComponent<Button>();
         _score = transform.Find("Score/ScoreValue").GetComponent<Text>();
+
+
+        _animator = GetComponent<Animator>();
+
+        StartCoroutine(ShowName());
+    }
+
+    IEnumerator ShowName()
+    {
+        yield return new WaitForSeconds(10);
+
+        _animator.Play("ShowName");
     }
 
     private void OnEnable()
@@ -25,9 +39,10 @@ public class EndView : MonoBehaviour
         _restartButton.onClick.AddListener(OnRestartButton);
         _exitButton.onClick.AddListener(OnExitButton);
 
-
         UIEvents.SetEndGameScore += UIEvents_SetEndGameScore;
     }
+
+
     private void OnDisble()
     {
         UIEvents.CloseStartView -= UIEvents_CloseEndView;
@@ -44,6 +59,7 @@ public class EndView : MonoBehaviour
     private void UIEvents_CloseEndView()
     {
         //gameObject.SetActive(false);
+
         Destroy(gameObject);
     }
 
@@ -51,7 +67,11 @@ public class EndView : MonoBehaviour
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
 
+
         SceneManager.LoadScene(currentSceneName);
+
+
+        
 
         //UIEvents.CloseStartView?.Invoke();
         //UIEvents.OpenGameplayView?.Invoke();
