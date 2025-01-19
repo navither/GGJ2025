@@ -68,7 +68,7 @@ public class EndView : MonoBehaviour
         string currentSceneName = SceneManager.GetActiveScene().name;
 
 
-        SceneManager.LoadScene(currentSceneName);
+        SceneManager.LoadScene(currentSceneName);  
 
 
         
