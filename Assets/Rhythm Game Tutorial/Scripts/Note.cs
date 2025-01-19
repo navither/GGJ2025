@@ -32,11 +32,12 @@ public class Note : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other) {
         if (other.CompareTag("Activator")) {
             // 判定结束
-            gameObject.SetActive(false);
+            //BeatChecker.instance.Miss();
             SpriteRenderer sr = other.GetComponent<SpriteRenderer>();
             sr.color = Color.white;
 
             BeatChecker.instance.isTiming = false;
+            Destroy(gameObject);
         }
     }
 

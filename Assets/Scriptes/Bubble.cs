@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class Bubble : MonoBehaviour
 {
-
+    public static Bubble instance;
     private bool _isPlaying;
     private bool _isEndStage;
+    [SerializeField] private float _maxRadius;
 
     private Animator _animator;
 
@@ -18,6 +19,7 @@ public class Bubble : MonoBehaviour
         _isEndStage = false;
         _animator = GetComponent<Animator>();
 
+        instance = this;
     }
 
     private void OnEnable()
@@ -79,9 +81,13 @@ public class Bubble : MonoBehaviour
         }
         else
         {
-            if (radius >= 3)
+            if (radius >= _maxRadius)
             {
-                newRadius = 3;
+                newRadius = _maxRadius;
+            }
+            if (radius <= 1)
+            {
+                newRadius = 1;
             }
         }
 

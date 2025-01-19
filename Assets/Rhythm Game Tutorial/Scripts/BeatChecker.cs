@@ -10,15 +10,20 @@ public class BeatChecker : MonoBehaviour
 {
     public static BeatChecker instance;
 
+    [HideInInspector]
     public GameObject currentNote;
 
     public bool isTiming = false;
 
     public int score = 0;
 
+    public int barScore = 4;
+
     public TextMeshProUGUI scoreText;
 
-    public RectTransform missEffect;
+    public GameObject missEffect;
+
+    public GameObject perfectEffect;
 
     public AudioClip[] clips;
 
@@ -27,6 +32,12 @@ public class BeatChecker : MonoBehaviour
     AudioSource keyAudioSource;
 
     AudioSource birdAudioSource;
+
+    public List<GameObject> birds;
+
+    public GameObject flyingBird;
+
+    int birdIndex = 0;
 
     private Dictionary<KeyCode, AudioClip> keySoundMap;
 
@@ -58,22 +69,39 @@ public class BeatChecker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.F))
+        if(scoreText)
+            scoreText.text = barScore.ToString();
+        if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.F))
         {
             if (isTiming)
             {
                 //判定正确
-                Debug.Log("判定正确");
+                //Debug.Log("判定正确");
 
                 score++;
 
-                if(scoreText)
-                scoreText.text = score.ToString();
+                if(score == 2){
+                    //FlyBird();
+                    flyingBird.SetActive(true);
+                }
+    
+
+                DOTween.Sequence().Append(perfectEffect.transform.DOScale(new Vector3(4, 4, 4), 0.3f).SetEase(Ease.OutBack))
+                    .Append(perfectEffect.transform.DOScale(new Vector3(0, 0, 0), 0.2f));
 
                 Destroy(currentNote);
+
+                foreach (var entry in keySoundMap)
+                {
+                    if (Input.GetKeyDown(entry.Key))
+                    {
+                        keyAudioSource.PlayOneShot(entry.Value);
+                    }
+                }
             }
             else
             {
+                Miss();
                 //判定错误
                 //Debug.Log("判定错误");
                 //Vector2 originPos = missEffect.anchoredPosition;
@@ -82,22 +110,44 @@ public class BeatChecker : MonoBehaviour
                 // .Append(missEffect.DOAnchorPos(originPos, 0));
             }
 
-            foreach (var entry in keySoundMap)
-            {
-                if (Input.GetKeyDown(entry.Key))
-                {
-                    keyAudioSource.PlayOneShot(entry.Value);
-                }
-            }
 
-            if (Input.GetKeyDown(KeyCode.Space)){
-                birdAudioSource.mute = false;
-            }
+
+
+        }
+        if (Input.GetKeyDown(KeyCode.Space) && flyingBird.activeSelf){
+            birdAudioSource.mute = false;
+            DOTween.Sequence().Append(perfectEffect.transform.DOScale(new Vector3(4, 4, 4), 0.3f).SetEase(Ease.OutBack))
+                    .Append(perfectEffect.transform.DOScale(new Vector3(0, 0, 0), 0.2f));
         }
     }
 
     public void PlayChorsClip()
     {
         birdAudioSource.Play();
+    }
+    void FlyBird()
+    {
+        StartCoroutine(FlyBirdCoroutine());
+    }
+
+    IEnumerator FlyBirdCoroutine(){
+        while(birdIndex < birds.Count){
+            Instantiate(birds[birdIndex], transform, true);
+
+            birdIndex++;
+
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
+    public void Miss()
+    {
+        DOTween.Sequence().Append(missEffect.transform.DOScale(new Vector3(4, 4, 4), 0.3f).SetEase(Ease.OutBack))
+            .Append(missEffect.transform.DOScale(new Vector3(0, 0, 0), 0.2f));
+        AudioSource missAudio = missEffect.GetComponent<AudioSource>();
+        if(!missAudio.isPlaying)
+            missAudio.Play();
+
+        barScore--;
     }
 }
