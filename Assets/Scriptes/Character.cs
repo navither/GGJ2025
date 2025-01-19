@@ -64,9 +64,9 @@ public class Character : MonoBehaviour
     void GameEvents_SetBuddleRadius(float radius)
     {
         //transform.localScale = new Vector3(_originCircleScale)
-
-        transform.localScale = Vector3.one * (_originBubbleScale / radius);
-        transform.position = _bubble.transform.position - new Vector3(0, radius / _originBubbleScale * _originCircleRadius + _originBubbleScale / radius * _originCharacterHalfY * 0.9f, 0);
+        //Debug.Log(_bubble.transform.localScale.y);
+        transform.localScale = Vector3.one * (_originBubbleScale / _bubble.transform.localScale.y);
+        transform.position = _bubble.transform.position - new Vector3(0, _bubble.transform.localScale.y / _originBubbleScale * _originCircleRadius + _originBubbleScale / _bubble.transform.localScale.y * _originCharacterHalfY * 0.9f, 0);
 
     }
 
